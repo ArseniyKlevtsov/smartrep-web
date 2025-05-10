@@ -1,1 +1,48 @@
-<p>login-page works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-block">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h3 class="card-title text-center mb-4">Вход в систему</h3>
+
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+          <input formControlName="userName" id="userName" type="text" 
+                 class="form-control" 
+                 [ngClass]="{'is-invalid': form.get('userName').invalid && form.get('userName').touched}"
+                 placeholder="Имя пользователя">
+        </div>
+        
+        <div *ngIf="form.get('userName').invalid && form.get('userName').touched" class="mt-1">
+          <div class="text-danger small" *ngIf="form.get('userName').errors['required']">
+            Имя пользователя обязательно для заполнения.
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+          <input formControlName="password" id="password" type="password" 
+                 class="form-control"
+                 [ngClass]="{'is-invalid': form.get('password').invalid && form.get('password').touched}"
+                 placeholder="Пароль">
+        </div>
+        
+        <div *ngIf="form.get('password').invalid && form.get('password').touched" class="mt-1">
+          <div class="text-danger small" *ngIf="form.get('password').errors['required']">
+            Пароль обязателен для заполнения.
+          </div>
+          <div class="text-danger small" *ngIf="form.get('password').errors['minlength']">
+            Пароль должен быть не менее {{ form.get('password').errors['minlength']['requiredLength'] }} символов.
+          </div>
+        </div>
+      </div>
+
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid || form.disabled">
+          Войти
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
