@@ -42,16 +42,16 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       if (params['registered']) {
         this.form.value['userName'] = params['userName'];
         this.form.value['password'] = params['password'];
-        NotificationService.success('Now you can Sign In');
+        NotificationService.success('Теперь вы можете войти в систему');
       }
       if (params['accessDenied']) {
         NotificationService.error(
-          'You should Sign In for get access to this resouse'
+          'Вы должны войти в систему, чтобы получить доступ к этому ресурсу'
         );
       }
       if (params['sessionFailed']) {
         NotificationService.error(
-          'You should Sign In for get access to this resouse'
+          'Произошла ошибка, перезайдите в систему'
         );
       }
     });
@@ -62,7 +62,21 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       this.asub.unsubscribe();
     }
   }
+
+  zaglushka(){
+    this.router.navigate(['/selectMode']);
+  }
+
   onSubmit() {
+    //delete after
+    this.zaglushka();
+    return;
+
+    if (this.form.invalid) {
+      NotificationService.error('Пожалуйста, исправьте ошибки в форме');
+      return;
+    }
+
     this.form.disable();
     this.asub = this.authService.login(this.form.value).subscribe(
       (data) => {

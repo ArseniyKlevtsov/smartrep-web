@@ -1,0 +1,21 @@
+<div class="select-mode-container">
+  <div class="mode-selection-card">
+    <h1 class="selection-title">Выберите режим работы системы</h1>
+    
+    <div class="mode-options">
+      <div class="mode-option" (click)="selectTeacherMode()">
+        <div class="mode-circle">
+          <img src="teacher-icon.png" alt="Режим учителя">
+        </div>
+        <div class="mode-label">Учитель</div>
+      </div>
+      
+      <div class="mode-option" (click)="selectStudentMode()">
+        <div class="mode-circle">
+          <img src="student-icon.png" alt="Режим ученика">
+        </div>
+        <div class="mode-label">Ученик</div>
+      </div>
+    </div>
+  </div>
+</div>
