@@ -1,0 +1,8 @@
+<div *ngIf="profile" class="profile-shortcut">
+  <img
+    [src]="profile.avatarUrl"
+    alt="User avatar"
+    class="avatar"
+  />
+  <span class="username">{{ profile.username }}</span>
+</div>

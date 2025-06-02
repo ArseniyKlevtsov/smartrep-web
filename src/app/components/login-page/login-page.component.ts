@@ -63,15 +63,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  zaglushka(){
-    this.router.navigate(['/selectMode']);
-  }
-
   onSubmit() {
-    //delete after
-    this.zaglushka();
-    return;
-
     if (this.form.invalid) {
       NotificationService.error('Пожалуйста, исправьте ошибки в форме');
       return;
@@ -80,7 +72,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.form.disable();
     this.asub = this.authService.login(this.form.value).subscribe(
       (data) => {
-        this.router.navigate(['/books']);
+        this.router.navigate(['/selectMode']);
       },
       (error) => {
         NotificationService.error(error['error']['message']);

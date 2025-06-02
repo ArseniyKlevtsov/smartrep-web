@@ -1,11 +1,12 @@
 {
-    "/api": {
-      "target": "http://localhost:7187",
-      "secure": false,
-      "changeOrigin": true,
-      "logLevel": "debug",
-      "pathRewrite": {
-        "^/api": ""
-      }
-    }
+  "/api": {
+    "target": "https://localhost:7234",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/static-files": {
+    "target": "https://localhost:7234",
+    "secure": false,
+    "changeOrigin": true
   }
+}

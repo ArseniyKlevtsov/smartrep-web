@@ -3,14 +3,12 @@ import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.co
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { SelectModePageComponent } from './components/select-mode-page/select-mode-page.component';
-import { TEACHER_ROUTES } from '../routes/teacher.routes';
-import { STUDENT_ROUTES } from '../routes/student.routes';
+import { authGuard } from './shared/guards/auth.guard';
+import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.component';
+import { AllCoursesPageComponent } from './components/all-courses-page/all-courses-page.component';
 
 export const routes: Routes = [
   {
-    // route consts
-    ...TEACHER_ROUTES,
-    ...STUDENT_ROUTES,
 
     // Auth routes
     path: '',
@@ -22,6 +20,16 @@ export const routes: Routes = [
     ],
   },
 
+  {
+    path: '', component: MainLayoutComponent, children: [
+      { path: '', redirectTo: '/books', pathMatch: "full" },
+
+      { path: 'all-courses', component: AllCoursesPageComponent, canActivate: [authGuard], canActivateChild: [authGuard] },
+
+      //{ path: 'accesDenied', component: AccessDeniedPageComponent },
+    ]
+  },
+
   // Mode selection
-  { path: 'selectMode', component: SelectModePageComponent },
+  { path: 'selectMode', component: SelectModePageComponent, canActivate: [authGuard]},
 ];

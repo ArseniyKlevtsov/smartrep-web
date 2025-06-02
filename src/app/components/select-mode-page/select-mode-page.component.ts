@@ -13,11 +13,11 @@ export class SelectModePageComponent {
 
   selectTeacherMode() {
     this.modeService.setTeacherMode();
-    this.router.navigate(['/teacher-dashboard']);
+    this.router.navigate(['/teacher-courses']);
   }
 
   selectStudentMode() {
     this.modeService.setStudentMode();
-    this.router.navigate(['/student-dashboard']);
+    this.router.navigate(['/all-courses']);
   }
 }

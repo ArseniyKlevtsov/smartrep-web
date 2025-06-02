@@ -1,0 +1,22 @@
+.navbar {
+  height: 70px;
+}
+
+.navbar-brand {
+  font-size: 24px;
+}
+
+.nav-link {
+  font-size: 16px;
+}
+
+.container-fluid {
+  margin: 0;
+  padding: 0 15px;
+  width: 100%;
+}
+
+/* Для выравнивания профиля по правому краю */
+.ms-auto {
+  margin-left: auto !important;
+}
