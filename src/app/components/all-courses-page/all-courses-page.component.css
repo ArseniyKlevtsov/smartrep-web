@@ -1,0 +1,17 @@
+/* Добавляем анимацию для кнопки загрузки */
+.btn-outline-primary {
+  transition: all 0.3s ease;
+  width: 60px;
+  height: 60px;
+}
+
+.btn-outline-primary:hover {
+  transform: scale(1.1);
+  background-color: var(--bs-primary);
+  color: white;
+}
+
+/* Стиль для иконки внутри кнопки */
+.btn-outline-primary i {
+  font-size: 1.5rem;
+}

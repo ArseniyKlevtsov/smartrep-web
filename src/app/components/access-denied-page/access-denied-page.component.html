@@ -1,0 +1,27 @@
+<!-- access-denied-page.component.html -->
+<div class="container d-flex flex-column justify-content-center align-items-center vh-100">
+  <div class="card text-center border-primary shadow" style="width: 100%; max-width: 500px;">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Доступ запрещён</h3>
+    </div>
+    <div class="card-body">
+      <i class="bi bi-shield-lock text-primary" style="font-size: 4rem;"></i>
+      <p class="card-text mt-3">
+        У вас недостаточно прав для просмотра этой страницы.
+        Пожалуйста, авторизуйтесь или обратитесь к администратору.
+      </p>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+        <button 
+          class="btn btn-outline-primary me-md-2" 
+          (click)="navigateToHome()">
+          <i class="bi bi-house-door"></i> На главную
+        </button>
+        <button 
+          class="btn btn-primary" 
+          (click)="navigateToLogin()">
+          <i class="bi bi-box-arrow-in-right"></i> Авторизоваться
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

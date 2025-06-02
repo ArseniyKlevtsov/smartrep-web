@@ -6,10 +6,25 @@ import { SelectModePageComponent } from './components/select-mode-page/select-mo
 import { authGuard } from './shared/guards/auth.guard';
 import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.component';
 import { AllCoursesPageComponent } from './components/all-courses-page/all-courses-page.component';
+import { AccessDeniedPageComponent } from './components/access-denied-page/access-denied-page.component';
+import { ProfilePageComponent } from './components/profile-page/profile-page.component';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 
 export const routes: Routes = [
-  {
 
+  { path: 'selectMode', component: SelectModePageComponent, canActivate: [authGuard]},
+
+  {
+    path: '', component: MainLayoutComponent, children: [
+      { path: '', redirectTo: '/all-courses', pathMatch: "full" },
+
+      { path: 'all-courses', component: AllCoursesPageComponent, canActivate: [authGuard], canActivateChild: [authGuard] },
+      { path: 'profile', component: ProfilePageComponent, canActivate: [authGuard], canActivateChild: [authGuard] },
+      { path: 'accesDenied', component: AccessDeniedPageComponent },
+    ]
+  },
+
+  {
     // Auth routes
     path: '',
     component: AuthLayoutComponent,
@@ -20,16 +35,6 @@ export const routes: Routes = [
     ],
   },
 
-  {
-    path: '', component: MainLayoutComponent, children: [
-      { path: '', redirectTo: '/books', pathMatch: "full" },
-
-      { path: 'all-courses', component: AllCoursesPageComponent, canActivate: [authGuard], canActivateChild: [authGuard] },
-
-      //{ path: 'accesDenied', component: AccessDeniedPageComponent },
-    ]
-  },
-
+  { path: '**', component: NotFoundPageComponent }
   // Mode selection
-  { path: 'selectMode', component: SelectModePageComponent, canActivate: [authGuard]},
 ];

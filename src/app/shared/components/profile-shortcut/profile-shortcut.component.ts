@@ -5,6 +5,7 @@ import { UserStorageService } from '../../services/user-storage.service';
 import { NgIf } from '@angular/common';
 import { ShortcutUserProfileResponse } from '../../interfaces/user/responses/shortcut-user-profile-response.interface';
 import { ImageService } from '../../services/image.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-shortcut',
@@ -15,7 +16,7 @@ import { ImageService } from '../../services/image.service';
 export class ProfileShortcutComponent implements OnInit {
   profile: ShortcutUserProfileResponse | null = null;
 
-  constructor(private userService: UserService,public imageService: ImageService) {}
+  constructor(private router: Router,private userService: UserService,public imageService: ImageService) {}
 
   ngOnInit(): void {
     this.loadUserProfile();
@@ -34,12 +35,14 @@ export class ProfileShortcutComponent implements OnInit {
     this.userService.getShortcutUserProfile(request).subscribe({
       next: (response) => {
         this.profile = response;
-        console.log(response.avatarUrl);
-        console.log(response.username);
       },
       error: (err) => {
         console.error('Failed to load user profile', err);
       }
     });
   }
-}
+
+  toProfile() {
+    this.router.navigate(['/profile']);
+  }
+} 

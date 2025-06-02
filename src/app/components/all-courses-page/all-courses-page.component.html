@@ -1,1 +1,60 @@
-<p>all-courses-page works!</p>
+<div class="container py-5">
+  <!-- Поисковая строка -->
+  <div class="row justify-content-center mb-5">
+    <div class="col-md-8">
+      <div class="input-group shadow-sm">
+        <input 
+          type="text" 
+          class="form-control rounded-pill-start" 
+          placeholder="Поиск курсов..." 
+          [(ngModel)]="searchText"
+          (input)="onSearch()">
+        <button 
+          class="btn btn-primary rounded-pill-end px-4" 
+          type="button"
+          (click)="onSearch()">
+          <i class="bi bi-search"></i> Найти
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Индикатор загрузки -->
+  <div *ngIf="isLoading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Загрузка...</span>
+    </div>
+  </div>
+
+  <!-- Список курсов -->
+  <div *ngIf="!isLoading">
+    <div class="row g-4">
+      <div class="col-12" *ngIf="courses.length === 0">
+        <div class="alert alert-info text-center">
+          Курсы не найдены. Попробуйте изменить параметры поиска.
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4" *ngFor="let course of courses">
+        <app-course-card [course]="course"></app-course-card>
+      </div>
+    </div>
+
+    <!-- Кнопка "Загрузить еще" -->
+    <div class="text-center mt-5" *ngIf="canLoadMore()">
+      <button 
+        class="btn btn-outline-primary rounded-circle p-3"
+        (click)="loadMore()"
+        [disabled]="isLoadingMore">
+        <i class="bi" [class.bi-plus-lg]="!isLoadingMore" [class.bi-arrow-repeat]="isLoadingMore"></i>
+      </button>
+    </div>
+
+    <!-- Индикатор загрузки доп. курсов -->
+    <div *ngIf="isLoadingMore" class="text-center mt-3">
+      <div class="spinner-border spinner-border-sm text-primary" role="status">
+        <span class="visually-hidden">Загрузка...</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+/* access-denied-page.component.css */
+.card {
+  border-width: 2px;
+}
+
+.btn-outline-primary {
+  border-width: 2px;
+}
+
+.bi {
+  vertical-align: -.125em;
+}

@@ -1,0 +1,22 @@
+footer {
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+footer a {
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+footer a:hover {
+  color: #cfe2ff !important;
+  text-decoration: underline;
+}
+
+.social-icons i {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.social-icons i:hover {
+  transform: translateY(-3px);
+}

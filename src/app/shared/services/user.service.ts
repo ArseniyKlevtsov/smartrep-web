@@ -1,16 +1,6 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { TokenStorageService } from './token-storage.service';
-
-import { RegisterRequestDto } from '../interfaces/auth/requests/register-request-dto.interface';
-import { RefreshRequestDto } from '../interfaces/auth/requests/refresh-request-dto.interface';
-import { LoginRequestDto } from '../interfaces/auth/requests/login-request-dto.interface';
-import { LoginResponseDto } from '../interfaces/auth/responses/login-response-dto.interface';
-import { Observable, tap, throwError } from 'rxjs';
-import { RegisterResponseDto } from '../interfaces/auth/responses/register-response-dto';
-import { UserStorageService } from './user-storage.service';
+import { Observable} from 'rxjs';
 import { ShortcutUserProfileResponse } from '../interfaces/user/responses/shortcut-user-profile-response.interface';
 import { UserInfoRequest } from '../interfaces/user/requests/user-info-request.interface';
 
@@ -18,7 +8,6 @@ import { UserInfoRequest } from '../interfaces/user/requests/user-info-request.i
   providedIn: 'root',
 })
 export class UserService {
-  
 
   constructor(
     private http: HttpClient,
