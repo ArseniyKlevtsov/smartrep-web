@@ -1,0 +1,19 @@
+<div class="lesson-card" [style.background-color]="backgroundColor">
+  <div class="lesson-header">
+    <span class="lesson-name">{{ truncateText(lesson.lessonName, 20) }}</span>
+    <span class="lesson-price">{{ lesson.price }} р.</span>
+  </div>
+  
+  <div class="lesson-time">
+    {{ formatTime(lesson.startTime) }} ({{ lesson.durationMinutes }} мин)
+  </div>
+  
+  <div class="lesson-status">
+    <span class="badge" [class.bg-success]="lesson.paymentStatus" [class.bg-warning]="!lesson.paymentStatus">
+      {{ lesson.paymentStatus ? 'Оплачено' : 'Не оплачено' }}
+    </span>
+    <span class="badge bg-info ms-2" *ngIf="lesson.status">
+      {{ lesson.status }}
+    </span>
+  </div>
+</div>

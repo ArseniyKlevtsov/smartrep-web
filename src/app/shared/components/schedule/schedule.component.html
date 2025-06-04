@@ -1,0 +1,35 @@
+<div class="schedule-container">
+  <!-- Навигация по неделям -->
+  <div class="week-navigation">
+    <button class="btn btn-outline-primary btn-sm" (click)="prevWeek()">
+      <i class="bi bi-chevron-left"></i> Пред. неделя
+    </button>
+    
+    <div class="current-week">
+      {{ currentWeekStart.format('D MMM') }} - {{ currentWeekStart.clone().add(6, 'days').format('D MMM YYYY') }}
+    </div>
+    
+    <button class="btn btn-outline-primary btn-sm" (click)="nextWeek()">
+      След. неделя <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+
+  <!-- Заголовки дней недели -->
+  <div class="days-header">
+    <div class="day-header" *ngFor="let day of days; let i = index">
+      <div class="day-name">{{ daysOfWeek[i] }}</div>
+      <div class="day-date">{{ formatDateHeader(day) }}</div>
+    </div>
+  </div>
+
+  <!-- Сетка расписания -->
+  <div class="schedule-grid">
+    <div class="day-column" *ngFor="let day of days">
+      <app-lesson-card 
+        *ngFor="let lesson of getLessonsForDay(day)"
+        [lesson]="lesson"
+        [backgroundColor]="cardBackgroundColor">
+      </app-lesson-card>
+    </div>
+  </div>
+</div>

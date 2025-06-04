@@ -26,7 +26,7 @@ export class ProfilePageComponent implements OnInit {
   loadProfile(): void {
     const request: UserInfoRequest = { userId: UserStorageService.getUserId() };
     
-    this.userService.getUserProfileResponse(request).subscribe({
+    this.userService.getUserProfile(request).subscribe({
       next: (response) => {
         this.user = response;
       },

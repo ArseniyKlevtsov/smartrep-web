@@ -1,0 +1,16 @@
+h4 {
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #eee;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+  .btn-group {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .btn-group .btn {
+    flex: 1;
+  }
+}

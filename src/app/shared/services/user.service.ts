@@ -18,8 +18,8 @@ export class UserService {
     return this.http.post<ShortcutUserProfileResponse>('/api/users/getShortcutUserProfile', request);
   }
 
-  getUserProfileResponse(request: UserInfoRequest): Observable<UserProfileResponse> {
-    return this.http.post<UserProfileResponse>('/api/users/getUserProfileResponse', request);
+  getUserProfile(request: UserInfoRequest): Observable<UserProfileResponse> {
+    return this.http.post<UserProfileResponse>('/api/users/getUserProfile', request);
   }
 
 }

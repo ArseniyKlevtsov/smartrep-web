@@ -18,6 +18,11 @@
         <li class="nav-item">
           <a class="nav-link fw-medium" routerLink="/all-teachers" routerLinkActive="active">Преподаватели</a>
         </li>
+        <div *ngIf="hasAcces">
+          <li class="nav-item">
+            <a class="nav-link fw-medium" routerLink="/my-lessons" routerLinkActive="active">Мои занятия</a>
+          </li>
+        </div>
       </ul>
 
       <!-- Профиль и выход справа -->
