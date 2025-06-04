@@ -1,1 +1,87 @@
-<p>profile-page works!</p>
+<div class="container py-5">
+  <div class="row g-4">
+    <!-- Аватар -->
+    <div class="col-md-3 text-center">
+      <div class="position-relative">
+        <img 
+          [src]="user.avatarUrl || 'assets/default-avatar.png'" 
+          class="rounded-circle border border-4 border-primary"
+          width="200" 
+          height="200"
+          (error)="handleImageError($event)">
+        
+        <button class="btn btn-sm btn-outline-secondary position-absolute bottom-0 end-0"
+                *ngIf="!isEditing" 
+                (click)="startEditing()">
+          <i class="bi bi-pencil"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Основная информация -->
+    <div class="col-md-5">
+      <div class="mb-3" *ngIf="!isEditing; else editField">
+        <h2>{{ user.userName }}</h2>
+        <p class="text-muted">{{ user.fullName }}</p>
+        <p><i class="bi bi-envelope me-2"></i>{{ user.email }}</p>
+        <p><i class="bi bi-telephone me-2"></i>{{ user.phoneNumber }}</p>
+        <small class="text-muted">Зарегистрирован: {{ user.createdAt | date:'dd.MM.yyyy' }}</small>
+      </div>
+
+      <ng-template #editField>
+        <div class="mb-3">
+          <input type="text" class="form-control mb-2" [(ngModel)]="editData.userName">
+          <input type="text" class="form-control mb-2" [(ngModel)]="editData.fullName">
+          <input type="email" class="form-control mb-2" [(ngModel)]="editData.email">
+          <input type="tel" class="form-control mb-2" [(ngModel)]="editData.phoneNumber">
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- Описания -->
+    <div class="col-12 mt-4">
+      <div class="row g-4">
+        <!-- Описание студента -->
+        <div class="col-md-6">
+          <h5>Обо мне</h5>
+          <div *ngIf="!isEditing; else editDesc">
+            <p>{{ user.studentDescription || 'Нет описания' }}</p>
+          </div>
+          <ng-template #editDesc>
+            <textarea class="form-control" rows="5" 
+                      [(ngModel)]="editData.studentDescription"></textarea>
+          </ng-template>
+        </div>
+
+        <!-- Описание учителя -->
+        <div class="col-md-6" *ngIf="user.teacherStatusConfirmed">
+          <h5>Опыт преподавания</h5>
+          <div *ngIf="!isEditing; else editTeacherDesc">
+            <p>{{ user.teacherDescription || 'Нет описания' }}</p>
+          </div>
+          <ng-template #editTeacherDesc>
+            <textarea class="form-control" rows="5" 
+                      [(ngModel)]="editData.teacherDescription"></textarea>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <!-- Кнопки управления -->
+    <div class="col-12 mt-4">
+      <div *ngIf="!isEditing">
+        <button class="btn btn-primary" (click)="startEditing()">
+          Редактировать
+        </button>
+      </div>
+      <div *ngIf="isEditing">
+        <button class="btn btn-success me-2" (click)="saveChanges()">
+          Сохранить
+        </button>
+        <button class="btn btn-outline-secondary" (click)="cancelEditing()">
+          Отмена
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
