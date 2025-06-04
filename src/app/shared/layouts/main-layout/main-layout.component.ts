@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ProfileShortcutComponent } from '../../components/profile-shortcut/profile-shortcut.component';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FooterComponent } from "../../components/footer/footer.component";
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -11,4 +12,13 @@ import { FooterComponent } from "../../components/footer/footer.component";
 })
 export class MainLayoutComponent {
 
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }

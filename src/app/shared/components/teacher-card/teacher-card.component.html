@@ -1,0 +1,42 @@
+<div class="card rounded-4 shadow-sm border-0 h-100">
+  <div class="row g-0 h-100">
+    <!-- Аватар -->
+    <div class="col-md-3">
+      <img 
+        [src]="teacher.teacherAvatarUrl || 'assets/default-avatar.png'"
+        class="img-fluid rounded-start-4 h-100 object-fit-cover"
+        alt="Teacher avatar"
+        (error)="handleImageError($event)">
+    </div>
+    
+    <!-- Основная информация -->
+    <div class="col-md-7 d-flex flex-column">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start">
+          <div>
+            <h5 class="card-title mb-1">{{ teacher.teacherName }}</h5>
+            <p class="card-text text-muted mb-2">{{ truncateText(teacher.teacherDescription, 120) }}</p>
+          </div>
+        </div>
+        
+        <div class="mt-auto">
+          <div class="d-flex align-items-center gap-3 mt-3">
+            <a [href]="'mailto:' + teacher.email" class="text-decoration-none">
+              <i class="bi bi-envelope"></i> {{ teacher.email }}
+            </a>
+            <a [href]="'tel:' + teacher.phoneNumber" class="text-decoration-none">
+              <i class="bi bi-telephone"></i> {{ teacher.phoneNumber }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Кнопка -->
+    <div class="col-md-2 d-flex align-items-center justify-content-center bg-light rounded-end-4">
+      <button class="btn btn-outline-primary rounded-pill px-4">
+        Профиль
+      </button>
+    </div>
+  </div>
+</div>

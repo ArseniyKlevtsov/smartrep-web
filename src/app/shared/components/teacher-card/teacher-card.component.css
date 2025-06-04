@@ -1,0 +1,76 @@
+/* Основные стили карточки */
+.teacher-card {
+  transition: all 0.3s ease;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.teacher-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Стили для изображения */
+.teacher-avatar {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Стили для контента */
+.teacher-content {
+  padding: 1.5rem;
+}
+
+.teacher-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.teacher-description {
+  color: #6c757d;
+  margin-bottom: 1rem;
+}
+
+/* Стили для контактов */
+.teacher-contacts {
+  margin-top: auto;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.contact-icon {
+  margin-right: 0.5rem;
+  color: #6c757d;
+}
+
+/* Стили для кнопки */
+.profile-btn {
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .teacher-avatar-container {
+    height: 200px;
+  }
+  
+  .teacher-avatar {
+    border-radius: 1rem 1rem 0 0 !important;
+  }
+  
+  .teacher-content {
+    padding: 1rem;
+  }
+  
+  .profile-btn-container {
+    padding: 1rem;
+    border-radius: 0 0 1rem 1rem !important;
+  }
+}

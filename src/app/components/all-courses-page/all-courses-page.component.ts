@@ -66,7 +66,7 @@ export class AllCoursesPageComponent implements OnInit {
       pageSize: this.pageSize
     };
 
-    return this.courseService.getShortcutUserProfile(request).pipe(
+    return this.courseService.GetFSPCourses(request).pipe(
       tap(response => {
         if (reset) {
           this.courses = response.courses;

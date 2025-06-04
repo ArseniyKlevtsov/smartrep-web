@@ -13,7 +13,7 @@ export class CourseService {
     private http: HttpClient,
   ) {}
 
-  getShortcutUserProfile(request: GetFSPCoursesRequest): Observable<GetFSPCoursesResponse> {
+  GetFSPCourses(request: GetFSPCoursesRequest): Observable<GetFSPCoursesResponse> {
     return this.http.post<GetFSPCoursesResponse>('/api/courses/getFSPCoursesResponse', request);
   }
 }

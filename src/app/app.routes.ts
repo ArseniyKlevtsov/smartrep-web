@@ -9,6 +9,7 @@ import { AllCoursesPageComponent } from './components/all-courses-page/all-cours
 import { AccessDeniedPageComponent } from './components/access-denied-page/access-denied-page.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { AllTeachersPageComponent } from './components/all-teachers-page/all-teachers-page.component';
 
 export const routes: Routes = [
 
@@ -16,9 +17,10 @@ export const routes: Routes = [
 
   {
     path: '', component: MainLayoutComponent, children: [
-      { path: '', redirectTo: '/all-courses', pathMatch: "full" },
+      { path: '', redirectTo: '/all-teachers', pathMatch: "full" },
 
       { path: 'all-courses', component: AllCoursesPageComponent, canActivate: [authGuard], canActivateChild: [authGuard] },
+      { path: 'all-teachers', component: AllTeachersPageComponent, canActivate: [authGuard], canActivateChild: [authGuard] },
       { path: 'profile', component: ProfilePageComponent, canActivate: [authGuard], canActivateChild: [authGuard] },
       { path: 'accesDenied', component: AccessDeniedPageComponent },
     ]

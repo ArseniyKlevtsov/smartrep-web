@@ -1,0 +1,43 @@
+.card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.object-fit-cover {
+  object-fit: cover;
+  object-position: center;
+}
+
+.rounded-start-4 {
+  border-top-left-radius: 1rem !important;
+  border-bottom-left-radius: 1rem !important;
+}
+
+.rounded-end-4 {
+  border-top-right-radius: 1rem !important;
+  border-bottom-right-radius: 1rem !important;
+}
+
+@media (max-width: 768px) {
+  .card > .row > div {
+    width: 100% !important;
+  }
+  
+  .card img {
+    border-radius: 1rem 1rem 0 0 !important;
+    height: 200px !important;
+  }
+  
+  .rounded-end-4 {
+    border-radius: 0 0 1rem 1rem !important;
+  }
+}
+
+/* Стили для контактов */
+.bi {
+  margin-right: 0.3rem;
+}
