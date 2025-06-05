@@ -1,0 +1,11 @@
+<div class="comment-list">
+  <h3>Комментарии</h3>
+  
+  <div *ngIf="comments.length === 0" class="no-comments">
+    Пока нет комментариев
+  </div>
+
+  <div *ngFor="let comment of comments" class="comment-item">
+    <app-comment [comment]="comment"></app-comment>
+  </div>
+</div>

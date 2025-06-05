@@ -1,0 +1,40 @@
+<div class="add-comment">
+  <h4>Добавить комментарий</h4>
+  
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <textarea 
+    [(ngModel)]="message" 
+    placeholder="Напишите ваш комментарий..."
+    class="comment-textarea"
+  ></textarea>
+
+  <div class="comment-actions">
+    <label class="file-upload-btn">
+      <input 
+        type="file" 
+        (change)="onFileSelected($event)"
+        style="display: none;"
+      >
+      <i class="bi bi-paperclip"></i> Прикрепить файл
+    </label>
+    
+    <span *ngIf="file" class="file-name">
+      {{ file.name }}
+      <button (click)="file = null" class="remove-file-btn">
+        <i class="bi bi-x"></i>
+      </button>
+    </span>
+
+    <button 
+      (click)="submitComment()" 
+      [disabled]="isSubmitting || (!message.trim() && !file)"
+      class="submit-btn"
+    >
+      <span *ngIf="!isSubmitting">Отправить</span>
+      <span *ngIf="isSubmitting">Отправка...</span>
+    </button>
+  </div>
+</div>

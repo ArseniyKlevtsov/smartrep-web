@@ -1,0 +1,129 @@
+.task {
+  background: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.task.expanded {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.task-title {
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.task-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  background: #ffebee;
+  color: #c62828;
+}
+
+.status-badge.solved {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.grade-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.toggle-icon {
+  transition: transform 0.3s;
+}
+
+.task.expanded .toggle-icon {
+  transform: rotate(180deg);
+}
+
+.task-body {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.task-description p {
+  margin: 0 0 15px 0;
+  color: #555;
+  line-height: 1.5;
+}
+
+.task-file {
+  margin-bottom: 15px;
+}
+
+.file-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #2196f3;
+  text-decoration: none;
+}
+
+.file-link:hover {
+  text-decoration: underline;
+}
+
+.task-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-mark, .btn-upload {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-mark {
+  background: #e3f2fd;
+  color: #2196f3;
+}
+
+.btn-mark.solved {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.btn-mark:hover {
+  background: #bbdefb;
+}
+
+.btn-upload {
+  background: #f5f5f5;
+  color: #555;
+}
+
+.btn-upload:hover {
+  background: #e0e0e0;
+}

@@ -1,0 +1,24 @@
+<div class="comment">
+  <div class="comment-header">
+    <div class="user-avatar">
+      <img *ngIf="comment.userAvatarUrl" [src]="comment.userAvatarUrl" alt="Аватар">
+      <div *ngIf="!comment.userAvatarUrl" class="avatar-placeholder">
+        {{ comment.userName?.charAt(0) || '?' }}
+      </div>
+    </div>
+    <div class="user-info">
+      <span class="user-name">{{ comment.userName || 'Аноним' }}</span>
+      <span class="comment-time">• 2 часа назад</span>
+    </div>
+  </div>
+  
+  <div class="comment-body">
+    <p>{{ comment.message }}</p>
+    
+    <div *ngIf="comment.fileUrl" class="comment-file">
+      <a [href]="comment.fileUrl" target="_blank" class="file-link">
+        <i class="bi bi-paperclip"></i> Прикрепленный файл
+      </a>
+    </div>
+  </div>
+</div>

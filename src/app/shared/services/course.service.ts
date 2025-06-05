@@ -14,6 +14,6 @@ export class CourseService {
   ) {}
 
   GetFSPCourses(request: GetFSPCoursesRequest): Observable<GetFSPCoursesResponse> {
-    return this.http.post<GetFSPCoursesResponse>('/api/courses/getFSPCoursesResponse', request);
+    return this.http.post<GetFSPCoursesResponse>('/api/courses/getFSPCourses', request);
   }
 }

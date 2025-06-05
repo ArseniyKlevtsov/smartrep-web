@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { LessonPreviewResponse } from '../../interfaces/lessons/responses/lesson-preview-response';
 import { NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lesson-card',
@@ -11,6 +12,8 @@ import { NgIf } from '@angular/common';
 export class LessonCardComponent {
   @Input() lesson!: LessonPreviewResponse;
   @Input() backgroundColor: string = '#ffffff';
+
+  constructor(private router: Router) {}
 
   truncateText(text: string, maxLength: number): string {
     return text?.length > maxLength
@@ -23,5 +26,9 @@ export class LessonCardComponent {
       hour: '2-digit',
       minute: '2-digit',
     });
+  }
+
+  navigateToLesson(lessonId: string): void {
+    this.router.navigate(['/lessons', lessonId]);
   }
 }

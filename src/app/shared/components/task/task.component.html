@@ -1,0 +1,36 @@
+<div class="task" [class.expanded]="isExpanded">
+  <div class="task-header" (click)="isExpanded = !isExpanded">
+    <h4 class="task-title">{{ task.name }}</h4>
+    
+    <div class="task-status">
+      <span class="status-badge" [class.solved]="task.isSolved">
+        {{ task.isSolved ? 'Выполнено' : 'Не выполнено' }}
+      </span>
+      <span *ngIf="task.grade" class="grade-badge">
+        Оценка: {{ task.grade }}
+      </span>
+      <i class="bi bi-chevron-down toggle-icon"></i>
+    </div>
+  </div>
+  
+  <div *ngIf="isExpanded" class="task-body">
+    <div class="task-description">
+      <p>{{ task.description }}</p>
+    </div>
+    
+    <div *ngIf="task.fileUrl" class="task-file">
+      <a [href]="task.fileUrl" target="_blank" class="file-link">
+        <i class="bi bi-download"></i> Скачать файл задания
+      </a>
+    </div>
+    
+    <div class="task-actions">
+      <button class="btn-mark" [class.solved]="task.isSolved">
+        {{ task.isSolved ? 'Отметить как не выполненное' : 'Отметить как выполненное' }}
+      </button>
+      <button *ngIf="!task.isSolved" class="btn-upload">
+        <i class="bi bi-upload"></i> Загрузить решение
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="task-list">
+  <h3>Задания к уроку</h3>
+  
+  <div *ngIf="tasks.length === 0" class="no-tasks">
+    Нет заданий для этого урока
+  </div>
+
+  <div *ngFor="let task of tasks" class="task-item">
+    <app-task [task]="task"></app-task>
+  </div>
+</div>

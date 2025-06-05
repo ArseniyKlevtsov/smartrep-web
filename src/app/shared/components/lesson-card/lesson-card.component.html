@@ -1,4 +1,4 @@
-<div class="lesson-card" [style.background-color]="backgroundColor">
+<div class="lesson-card" [style.background-color]="backgroundColor" (click)="navigateToLesson(lesson.lessonId)">
   <div class="lesson-header">
     <span class="lesson-name">{{ truncateText(lesson.lessonName, 20) }}</span>
     <span class="lesson-price">{{ lesson.price }} р.</span>

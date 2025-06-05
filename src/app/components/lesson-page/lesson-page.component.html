@@ -1,0 +1,109 @@
+<div class="lesson-page-container">
+  <!-- Заголовок и навигация -->
+  <div class="lesson-header">
+    <h1>{{ lesson?.name || 'Загрузка...' }}</h1>
+    <div class="lesson-nav">
+      <button class="btn-back" routerLink="/my-lessons">
+        <i class="bi bi-arrow-left"></i> Назад к расписанию
+      </button>
+    </div>
+  </div>
+
+  <!-- Индикатор загрузки -->
+  <div *ngIf="isLoading" class="loading-indicator">
+    <div class="spinner"></div>
+    <p>Загрузка данных...</p>
+  </div>
+
+  <!-- Сообщение об ошибке -->
+  <div *ngIf="!isLoading && errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Основной контент -->
+  <div *ngIf="!isLoading && lesson" class="lesson-content">
+    <!-- Табы -->
+    <div class="tabs">
+      <button [class.active]="activeTab === 'info'" (click)="changeTab('info')">
+        Информация
+      </button>
+      <button [class.active]="activeTab === 'tasks'" (click)="changeTab('tasks')">
+        Задания ({{ tasks.length }})
+      </button>
+      <button [class.active]="activeTab === 'comments'" (click)="changeTab('comments')">
+        Комментарии ({{ comments.length }})
+      </button>
+    </div>
+
+    <!-- Контент табов -->
+    <div class="tab-content">
+      <!-- Информация об уроке -->
+      <div *ngIf="activeTab === 'info'" class="lesson-info">
+        <div class="info-section">
+          <h3>Детали урока</h3>
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="info-label">Время начала:</span>
+              <span class="info-value">
+                {{ lesson.startTime | date:'dd.MM.yyyy HH:mm' }}
+              </span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Длительность:</span>
+              <span class="info-value">
+                {{ lesson.durationMinutes }} минут
+              </span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Статус:</span>
+              <span class="info-value">
+                <span [ngClass]="{
+                  'status-badge': true,
+                  'status-active': lesson.status === 'ACTIVE',
+                  'status-completed': lesson.status === 'COMPLETED',
+                  'status-canceled': lesson.status === 'CANCELED'
+                }">
+                  {{ lesson.status | statusTranslate }}
+                </span>
+              </span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Цена:</span>
+              <span class="info-value">
+                {{ lesson.price | currency:'BYN':'symbol-narrow':'1.2-2' }}
+              </span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Оплата:</span>
+              <span class="info-value">
+                <span [ngClass]="{
+                  'payment-badge': true,
+                  'payment-paid': lesson.paymentStatus,
+                  'payment-unpaid': !lesson.paymentStatus
+                }">
+                  {{ lesson.paymentStatus ? 'Оплачено' : 'Не оплачено' }}
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="lesson.description" class="info-section">
+          <h3>Описание урока</h3>
+          <p class="lesson-description">{{ lesson.description }}</p>
+        </div>
+      </div>
+
+      <!-- Задания -->
+      <div *ngIf="activeTab === 'tasks'" class="lesson-tasks">
+        <app-task-list [tasks]="tasks"></app-task-list>
+      </div>
+
+      <!-- Комментарии -->
+      <div *ngIf="activeTab === 'comments'" class="lesson-comments">
+        <app-comment-list [comments]="comments"></app-comment-list>
+        <app-add-comment [lessonId]="lesson.id"></app-add-comment>
+      </div>
+    </div>
+  </div>
+</div>
