@@ -42,6 +42,10 @@ export class ProfileShortcutComponent implements OnInit {
     });
   }
 
+  handleImageError(event: Event): void {
+    (event.target as HTMLImageElement).src = 'avatar-default.png';
+  }
+
   toProfile() {
     this.router.navigate(['/profile']);
   }

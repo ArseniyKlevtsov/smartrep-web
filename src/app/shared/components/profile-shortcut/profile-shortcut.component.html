@@ -1,6 +1,6 @@
 <div (click)="toProfile()">
   <div *ngIf="profile" class="profile-shortcut">
-    <img [src]="profile.avatarUrl" alt="User avatar" class="avatar" />
+    <img [src]="profile.avatarUrl" alt="User avatar" class="avatar" (error)="handleImageError($event)"/>
     <span class="username">{{ profile.username }}</span>
   </div>
 </div>
