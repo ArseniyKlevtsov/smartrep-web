@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CoursePreviewResponse } from '../../interfaces/courses/responses/course-preview-response.interface';
 import { CourseService } from '../../services/course.service';
@@ -9,7 +9,7 @@ import { CourseCardComponent } from "../course-card/course-card.component";
 
 @Component({
   selector: 'app-my-courses',
-  imports: [NgIf, CourseCardComponent],
+  imports: [NgIf, CourseCardComponent, NgFor],
   templateUrl: './my-courses.component.html',
   styleUrl: './my-courses.component.css'
 })
