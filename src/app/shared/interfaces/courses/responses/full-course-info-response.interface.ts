@@ -7,6 +7,7 @@ export interface FullCourseResponse {
   courseAvatarUrl: string;
   price: number;
   teacherName: string;
+  teacherId: string;
   teacherAvatarUrl: string;
   students: ShortcutUserProfileResponse[];
 }

@@ -1,0 +1,112 @@
+<!-- course-view.component.html -->
+<div class="container py-5">
+  <div *ngIf="isLoading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-2">Загрузка курса...</p>
+  </div>
+
+  <div *ngIf="!isLoading && course" class="course-details">
+    <!-- Хедер с кнопкой редактирования -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="mb-0">{{ course.courseName }}</h1>
+      <button *ngIf="isCurrentUserTeacher" 
+              (click)="onEditCourse()" 
+              class="btn btn-primary">
+        <i class="bi bi-pencil me-2"></i>Редактировать
+      </button>
+    </div>
+
+    <!-- Основная информация о курсе -->
+    <div class="row">
+      <!-- Левая колонка - информация о курсе -->
+      <div class="col-md-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="mb-4">
+              <h3 class="card-title">Описание курса</h3>
+              <p class="card-text">{{ course.courseDescription }}</p>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <h5 class="text-muted">Стоимость занятия</h5>
+                  <p class="fs-4">{{ course.price | currency:'BYN ':'symbol':'1.0-0' }}</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <h5 class="text-muted">Преподаватель</h5>
+                  <div class="d-flex align-items-center">
+                    <img *ngIf="course.teacherAvatarUrl" 
+                         [src]="course.teacherAvatarUrl" 
+                         class="rounded-circle me-2" 
+                         width="40" 
+                         height="40" 
+                         alt="Teacher avatar"
+                         (error)="iehs.handleAvatarImageError($event)">
+                    <span>{{ course.teacherName }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Правая колонка - аватар курса -->
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img *ngIf="course.courseAvatarUrl" 
+                 [src]="course.courseAvatarUrl" 
+                 class="img-fluid rounded mb-3" 
+                 alt="Course avatar"
+                 (error)="iehs.handleCourseImageError($event)">
+            <div *ngIf="!course.courseAvatarUrl" class="bg-light p-5 rounded mb-3">
+              <i class="bi bi-image text-muted" style="font-size: 3rem;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Список студентов -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="mb-0">Студенты курса</h3>
+      </div>
+      <div class="card-body">
+        <div *ngIf="course.students.length > 0; else noStudents" class="row">
+          <div *ngFor="let student of course.students" class="col-md-4 mb-3">
+            <div class="d-flex align-items-center">
+              <img *ngIf="student.avatarUrl" 
+                   [src]="student.avatarUrl" 
+                   class="rounded-circle me-3" 
+                   width="50" 
+                   height="50" 
+                   alt="Student avatar"
+                   (error)="iehs.handleAvatarImageError($event)">
+              <div *ngIf="!student.avatarUrl" 
+                   class="rounded-circle bg-secondary me-3 d-flex align-items-center justify-content-center" 
+                   style="width: 50px; height: 50px;">
+                <i class="bi bi-person text-white"></i>
+              </div>
+              <div>
+                <h5 class="mb-0">{{ student.username }}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-template #noStudents>
+          <div class="text-center py-4">
+            <i class="bi bi-people text-muted" style="font-size: 2rem;"></i>
+            <p class="mt-2 text-muted">На курсе пока нет студентов</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CoursePreviewResponse } from '../../interfaces/courses/responses/course-preview-response.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-card',
@@ -9,6 +10,10 @@ import { CoursePreviewResponse } from '../../interfaces/courses/responses/course
 })
 export class CourseCardComponent {
   @Input() course!: CoursePreviewResponse;
+
+  constructor( private router: Router) {
+
+  }
 
   handleAvatarImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
@@ -31,5 +36,9 @@ export class CourseCardComponent {
       currency: 'BYN',
       minimumFractionDigits: 0,
     }).format(amount);
+  }
+
+    navigateToCourse(courseId: string): void {
+    this.router.navigate(['/courses', courseId]);
   }
 }

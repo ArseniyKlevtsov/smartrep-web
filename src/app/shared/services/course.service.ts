@@ -25,22 +25,21 @@ getMyCourses(request: any): Observable<any> {
     return this.http.post('/api/courses/getMyCourses', request);
   }
 
-  // Новые методы из последних коммитов
   createCourse(request: any): Observable<void> {
-    return this.http.post<void>('/api/courses/create', request);
+    return this.http.post<void>('/api/courses/createCourse', request);
   }
 
   updateCourse(courseId: string, request: any): Observable<void> {
-    return this.http.put<void>('/api/courses/update/${courseId}', request);
+    return this.http.put<void>('/api/courses/updateCourse/${courseId}', request);
   }
 
   deleteCourse(courseId: string): Observable<void> {
-    return this.http.delete<void>('/api/courses/delete/${courseId}');
+    return this.http.delete<void>('/api/courses/deleteCourse/${courseId}');
   }
 
   getFullCourse(request: CourseInfoRequest): Observable<FullCourseResponse> {
     return this.http.post<FullCourseResponse>(
-      '/api/courses/getFull',
+      '/api/courses/getFullCourse',
       request
     );
   }
