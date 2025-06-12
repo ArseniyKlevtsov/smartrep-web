@@ -84,4 +84,19 @@
       </div>
     </div>
   </div>
+
+    <app-my-courses 
+    *ngIf="user.teacherStatusConfirmed"
+    [userId]="user.userId"
+    [AsTeacher]="true"
+    [showAddButton]="true"
+    (addCourse)="onAddCourse()">
+  </app-my-courses>
+
+  <!-- Блок ученика -->
+  <app-my-courses 
+    [userId]="user.userId"
+    [AsTeacher]="false"
+    [showAddButton]="false">
+  </app-my-courses>
 </div>

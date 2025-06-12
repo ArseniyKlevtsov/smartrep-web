@@ -5,12 +5,13 @@ import { UserInfoRequest } from '../../shared/interfaces/user/requests/user-info
 import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserStorageService } from '../../shared/services/user-storage.service';
+import { MyCoursesComponent } from '../../shared/components/my-courses/my-courses.component';
 
 @Component({
   selector: 'app-profile-page',
-  imports: [NgIf, FormsModule, DatePipe],
+  imports: [NgIf, FormsModule, DatePipe, MyCoursesComponent],
   templateUrl: './profile-page.component.html',
-  styleUrl: './profile-page.component.css'
+  styleUrl: './profile-page.component.css',
 })
 export class ProfilePageComponent implements OnInit {
   user!: UserProfileResponse;
@@ -25,12 +26,12 @@ export class ProfilePageComponent implements OnInit {
 
   loadProfile(): void {
     const request: UserInfoRequest = { userId: UserStorageService.getUserId() };
-    
+
     this.userService.getUserProfile(request).subscribe({
       next: (response) => {
         this.user = response;
       },
-      error: (err) => console.error('Ошибка загрузки профиля', err)
+      error: (err) => console.error('Ошибка загрузки профиля', err),
     });
   }
 
@@ -51,5 +52,9 @@ export class ProfilePageComponent implements OnInit {
 
   handleImageError(event: Event): void {
     (event.target as HTMLImageElement).src = 'avatar-default.png';
+  }
+
+  onAddCourse(): void {
+    // Навигация на создание курса
   }
 }

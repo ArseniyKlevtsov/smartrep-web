@@ -1,0 +1,34 @@
+<!-- components/my-courses/my-courses.component.html -->
+<div class="my-courses">
+  <ng-container *ngIf="isLoading; else content">
+    <div class="loading">Загрузка курсов...</div>
+  </ng-container>
+
+  <ng-template #content>
+    <div *ngIf="error" class="error">{{ error }}</div>
+
+    <!-- Заголовок в зависимости от режима -->
+    <div class="section-header">
+      <h3>{{ AsTeacher ? 'Мои курсы (как учитель)' : 'Мои курсы (как ученик)' }}</h3>
+      <button *ngIf="showAddButton && AsTeacher" 
+              (click)="onAddCourse()" 
+              class="add-button">
+        Добавить курс
+      </button>
+    </div>
+    
+    <!-- Список курсов -->
+    <div *ngIf="courses.length; else noCourses" class="courses-grid">
+      <app-course-card 
+        *ngFor="let course of courses"
+        [course]="course">
+      </app-course-card>
+    </div>
+
+    <ng-template #noCourses>
+      <div class="no-courses">
+        {{ AsTeacher ? 'У вас пока нет созданных курсов' : 'Вы пока не записаны на курсы' }}
+      </div>
+    </ng-template>
+  </ng-template>
+</div>
