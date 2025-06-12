@@ -1,0 +1,82 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      {{ isEditMode ? 'Редактирование курса' : 'Создание нового курса' }}
+    </div>
+    <div class="card-body">
+      <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="title" class="form-label">Название курса</label>
+          <input type="text" class="form-control" id="title" formControlName="title">
+          <div *ngIf="courseForm.get('title')?.invalid && courseForm.get('title')?.touched" class="text-danger">
+            Обязательное поле
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Описание</label>
+          <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+          <div *ngIf="courseForm.get('description')?.invalid && courseForm.get('description')?.touched" class="text-danger">
+            Обязательное поле
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="price" class="form-label">Цена</label>
+          <input type="number" class="form-control" id="price" formControlName="price" min="0">
+          <div *ngIf="courseForm.get('price')?.invalid" class="text-danger">
+            Укажите корректную цену
+          </div>
+        </div>
+
+        <!-- Блок учеников (только для редактирования) -->
+        <div class="mb-3" *ngIf="isEditMode">
+          <label class="form-label">Ученики курса</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Введите никнейм ученика" 
+                   [(ngModel)]="newStudentNickname" [ngModelOptions]="{standalone: true}">
+            <button class="btn btn-outline-primary" type="button" (click)="addStudent()">
+              Добавить
+            </button>
+          </div>
+          
+          <div class="alert alert-info" *ngIf="students.length === 0">
+            Нет добавленных учеников
+          </div>
+
+          <ul class="list-group" *ngIf="students.length > 0">
+            <li class="list-group-item d-flex justify-content-between align-items-center" 
+                *ngFor="let student of students; let i = index">
+              <div class="d-flex align-items-center">
+                <img [src]="student.avatarUrl" 
+                     class="rounded-circle me-2" width="30" height="30"
+                     alt="Аватар {{ student.username }}"
+                     (error)="imageHandler.handleAvatarImageError($event)">
+                {{ student.username }}
+              </div>
+              <button class="btn btn-sm btn-outline-danger" (click)="removeStudent(i)">
+                Удалить
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+          <button type="button" class="btn btn-outline-secondary" (click)="router.navigate(['/my-courses'])">
+            Отмена
+          </button>
+          
+          <div>
+            <button type="button" class="btn btn-danger me-2" 
+                    *ngIf="isEditMode" (click)="deleteCourse()">
+              Удалить курс
+            </button>
+            <button type="submit" class="btn btn-primary" [disabled]="courseForm.invalid">
+              {{ isEditMode ? 'Сохранить' : 'Создать' }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

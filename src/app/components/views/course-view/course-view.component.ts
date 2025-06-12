@@ -48,4 +48,5 @@ export class CourseViewComponent {
   onEditCourse(): void {
     this.router.navigate([`/courses/edit/${this.courseId}`]);
   }
+
 }

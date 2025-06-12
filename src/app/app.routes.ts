@@ -13,6 +13,7 @@ import { AllTeachersPageComponent } from './components/all-teachers-page/all-tea
 import { MyLessonsPageComponent } from './components/my-lessons-page/my-lessons-page.component';
 import { LessonPageComponent } from './components/lesson-page/lesson-page.component';
 import { CourseViewComponent } from './components/views/course-view/course-view.component';
+import { CourseFormComponent } from './components/forms/course-form/course-form.component';
 
 export const routes: Routes = [
 
@@ -23,15 +24,17 @@ export const routes: Routes = [
     path: '', component: MainLayoutComponent, children: [
       { path: '', redirectTo: '/all-teachers', pathMatch: "full" },
 
-      { path: 'all-courses', component: AllCoursesPageComponent, canActivate: [authGuard], canActivateChild: [authGuard] },
-      { path: 'courses/:id', component: CourseViewComponent, canActivate: [authGuard], canActivateChild: [authGuard] },
+      { path: 'all-courses', component: AllCoursesPageComponent, canActivate: [authGuard] },
+      { path: 'courses/edit/:id', component: CourseFormComponent, canActivate: [authGuard], data: { mode: 'edit' }, },
+      { path: 'courses/new', component: CourseFormComponent, canActivate: [authGuard] },
+      { path: 'courses/:id', component: CourseViewComponent, canActivate: [authGuard] },
 
-      { path: 'all-teachers', component: AllTeachersPageComponent, canActivate: [authGuard], canActivateChild: [authGuard] },
+      { path: 'all-teachers', component: AllTeachersPageComponent, canActivate: [authGuard]},
 
-      { path: 'profile', component: ProfilePageComponent, canActivate: [authGuard], canActivateChild: [authGuard] },
+      { path: 'profile', component: ProfilePageComponent, canActivate: [authGuard] },
 
-      { path: 'my-lessons', component: MyLessonsPageComponent, canActivate: [authGuard], canActivateChild: [authGuard] },
-      { path: 'lessons/:id', component: LessonPageComponent, canActivate: [authGuard], canActivateChild: [authGuard] },
+      { path: 'my-lessons', component: MyLessonsPageComponent, canActivate: [authGuard] },
+      { path: 'lessons/:id', component: LessonPageComponent, canActivate: [authGuard] },
     ]
   },
 

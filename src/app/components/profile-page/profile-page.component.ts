@@ -6,6 +6,7 @@ import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserStorageService } from '../../shared/services/user-storage.service';
 import { MyCoursesComponent } from '../../shared/components/my-courses/my-courses.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
@@ -18,7 +19,7 @@ export class ProfilePageComponent implements OnInit {
   isEditing = false;
   editData!: Partial<UserProfileResponse>;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadProfile();
@@ -55,6 +56,6 @@ export class ProfilePageComponent implements OnInit {
   }
 
   onAddCourse(): void {
-    // Навигация на создание курса
+    this.router.navigate(['/courses/new'])
   }
 }
