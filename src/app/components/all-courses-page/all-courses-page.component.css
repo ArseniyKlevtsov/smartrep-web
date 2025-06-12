@@ -1,17 +1,100 @@
-/* Добавляем анимацию для кнопки загрузки */
-.btn-outline-primary {
-  transition: all 0.3s ease;
-  width: 60px;
-  height: 60px;
+/* Стили для контейнера пагинации */
+.pagination-container {
+  text-align: center;
+  margin: 3rem 0;
+  padding: 1rem 0;
 }
 
-.btn-outline-primary:hover {
-  transform: scale(1.1);
-  background-color: var(--bs-primary);
+/* Основные стили кнопки */
+.load-more-btn {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--bs-primary);
+  background: transparent;
+  color: var(--bs-primary);
+  padding: 0.8rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  z-index: 1;
+  min-width: 200px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Текст и иконка внутри кнопки */
+.btn-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.bi-arrow-down-circle {
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
+}
+
+/* Эффект при наведении */
+.hover-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--bs-primary);
+  transition: width 0.5s ease;
+  z-index: 1;
+  border-radius: 50px;
+}
+
+/* Анимации и состояния */
+.load-more-btn:hover {
   color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(13, 110, 253, 0.3);
 }
 
-/* Стиль для иконки внутри кнопки */
-.btn-outline-primary i {
-  font-size: 1.5rem;
+.load-more-btn:hover .hover-effect {
+  width: 100%;
+}
+
+.load-more-btn:hover .bi-arrow-down-circle {
+  transform: translateY(3px);
+}
+
+/* Стили для состояния загрузки */
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.spinner {
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Отключенное состояние */
+.load-more-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.load-more-btn:disabled .hover-effect {
+  display: none;
 }

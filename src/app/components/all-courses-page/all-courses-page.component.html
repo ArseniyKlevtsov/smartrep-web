@@ -3,16 +3,18 @@
   <div class="row justify-content-center mb-5">
     <div class="col-md-8">
       <div class="input-group shadow-sm">
-        <input 
-          type="text" 
-          class="form-control rounded-pill-start" 
-          placeholder="Поиск курсов..." 
+        <input
+          type="text"
+          class="form-control rounded-pill-start"
+          placeholder="Поиск курсов..."
           [(ngModel)]="searchText"
-          (input)="onSearch()">
-        <button 
-          class="btn btn-primary rounded-pill-end px-4" 
+          (input)="onSearch()"
+        />
+        <button
+          class="btn btn-primary rounded-pill-end px-4"
           type="button"
-          (click)="onSearch()">
+          (click)="onSearch()"
+        >
           <i class="bi bi-search"></i> Найти
         </button>
       </div>
@@ -21,11 +23,10 @@
 
   <!-- Список курсов (теперь в одну колонку) -->
   <div *ngIf="!isLoading">
-    <div class="row gy-3"> <!-- vertical gap -->
+    <div class="row gy-3">
+      <!-- vertical gap -->
       <div class="col-12" *ngIf="courses.length === 0">
-        <div class="alert alert-info text-center">
-          Курсы не найдены
-        </div>
+        <div class="alert alert-info text-center">Курсы не найдены</div>
       </div>
 
       <!-- Каждая карточка занимает всю ширину -->
@@ -35,5 +36,26 @@
     </div>
 
     <!-- Остальные элементы (пагинация/загрузка) без изменений -->
+    <!-- Обновленная пагинация -->
+    <div class="pagination-container" *ngIf="canLoadMore()">
+      <button
+        class="load-more-btn"
+        (click)="loadMore()"
+        [disabled]="isLoadingMore"
+      >
+        <span class="btn-content">
+          <span *ngIf="!isLoadingMore" class="btn-text">
+            Показать ещё
+            <i class="bi bi-arrow-down-circle"></i>
+          </span>
+          <span *ngIf="isLoadingMore" class="loading-indicator">
+            <span class="spinner"></span>
+            Загружаем...
+          </span>
+        </span>
+
+        <span class="hover-effect"></span>
+      </button>
+    </div>
   </div>
 </div>
