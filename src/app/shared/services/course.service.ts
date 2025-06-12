@@ -5,6 +5,8 @@ import { GetFSPCoursesResponse } from '../interfaces/courses/responses/get-fsp-c
 import { Observable } from 'rxjs';
 import { FullCourseResponse } from '../interfaces/courses/responses/full-course-info-response.interface';
 import { CourseInfoRequest } from '../interfaces/courses/requests/course-info-request.interface';
+import { UpdateCourseRequest } from '../interfaces/courses/requests/update-course-request.interface';
+import { CreateCourseRequest } from '../interfaces/courses/requests/create-course-request.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -21,20 +23,20 @@ export class CourseService {
     );
   }
 
-getMyCourses(request: any): Observable<any> {
+  getMyCourses(request: any): Observable<any> {
     return this.http.post('/api/courses/getMyCourses', request);
   }
 
-  createCourse(request: any): Observable<void> {
+  createCourse(request: CreateCourseRequest): Observable<void> {
     return this.http.post<void>('/api/courses/createCourse', request);
   }
 
-  updateCourse(courseId: string, request: any): Observable<void> {
-    return this.http.put<void>('/api/courses/updateCourse/${courseId}', request);
+  updateCourse(request: UpdateCourseRequest): Observable<void> {
+    return this.http.post<void>('/api/courses/updateCourse', request);
   }
 
   deleteCourse(courseId: string): Observable<void> {
-    return this.http.delete<void>('/api/courses/deleteCourse/${courseId}');
+    return this.http.delete<void>(`/api/courses/deleteCourse?id=${courseId}`);
   }
 
   getFullCourse(request: CourseInfoRequest): Observable<FullCourseResponse> {
@@ -43,6 +45,4 @@ getMyCourses(request: any): Observable<any> {
       request
     );
   }
-
-  
 }

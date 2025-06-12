@@ -6,9 +6,9 @@
     <div class="card-body">
       <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
-          <label for="title" class="form-label">Название курса</label>
-          <input type="text" class="form-control" id="title" formControlName="title">
-          <div *ngIf="courseForm.get('title')?.invalid && courseForm.get('title')?.touched" class="text-danger">
+          <label for="name" class="form-label">Название курса</label>
+          <input type="text" class="form-control" id="name" formControlName="name">
+          <div *ngIf="courseForm.get('name')?.invalid && courseForm.get('name')?.touched" class="text-danger">
             Обязательное поле
           </div>
         </div>
@@ -54,7 +54,7 @@
                      (error)="imageHandler.handleAvatarImageError($event)">
                 {{ student.username }}
               </div>
-              <button class="btn btn-sm btn-outline-danger" (click)="removeStudent(i)">
+              <button class="btn btn-sm btn-outline-danger" (click)="removeStudent(i)" type="button">
                 Удалить
               </button>
             </li>
