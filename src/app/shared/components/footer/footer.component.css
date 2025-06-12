@@ -1,22 +1,32 @@
+/* Основные стили футера (уже есть у вас) */
 footer {
   border-top: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-footer a {
+/* Стили для ссылок */
+.footer-links {
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+  display: inline-block;
+  color: white;
   text-decoration: none;
   transition: all 0.3s ease;
+  cursor: pointer; /* Чтобы курсор менялся при наведении */
 }
 
-footer a:hover {
+.footer-links a:hover {
   color: #cfe2ff !important;
   text-decoration: underline;
+  transform: translateX(5px); /* Легкий сдвиг при наведении */
 }
 
-.social-icons i {
-  font-size: 1.5rem;
-  transition: transform 0.3s ease;
-}
-
-.social-icons i:hover {
-  transform: translateY(-3px);
+/* Если нужно убрать стандартное подчеркивание у ссылок */
+.hover-underline:hover {
+  text-decoration: underline !important;
 }
