@@ -32,6 +32,7 @@ export const routes: Routes = [
       { path: 'all-teachers', component: AllTeachersPageComponent, canActivate: [authGuard]},
 
       { path: 'profile', component: ProfilePageComponent, canActivate: [authGuard] },
+      { path: 'profile/:id', component: ProfilePageComponent, canActivate: [authGuard] },
 
       { path: 'my-lessons', component: MyLessonsPageComponent, canActivate: [authGuard] },
       { path: 'lessons/:id', component: LessonPageComponent, canActivate: [authGuard] },
