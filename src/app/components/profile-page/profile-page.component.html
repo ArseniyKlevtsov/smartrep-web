@@ -4,14 +4,14 @@
     <div class="col-md-3 text-center">
       <div class="position-relative">
         <img 
-          [src]="user.avatarUrl || 'assets/default-avatar.png'" 
+          [src]="user?.avatarUrl || 'assets/default-avatar.png'" 
           class="rounded-circle border border-4 border-primary"
           width="200" 
           height="200"
           (error)="handleImageError($event)">
         
         <button class="btn btn-sm btn-outline-secondary position-absolute bottom-0 end-0"
-                *ngIf="!isEditing" 
+                *ngIf="!isEditing && isCurrentUserProfile" 
                 (click)="startEditing()">
           <i class="bi bi-pencil"></i>
         </button>
@@ -21,11 +21,11 @@
     <!-- Основная информация -->
     <div class="col-md-5">
       <div class="mb-3" *ngIf="!isEditing; else editField">
-        <h2>Никнейм: {{ user.userName }}</h2>
-        <p class="text-muted">Полное имя: {{ user.fullName }}</p>
-        <p><i class="bi bi-envelope me-2"></i>Email: {{ user.email }}</p>
-        <p><i class="bi bi-telephone me-2"></i>Телефон: {{ user.phoneNumber }}</p>
-        <small class="text-muted">Зарегистрирован(а): {{ user.createdAt | date:'dd.MM.yyyy' }}</small>
+        <h2>Никнейм: {{ user?.userName }}</h2>
+        <p class="text-muted">Полное имя: {{ user?.fullName }}</p>
+        <p><i class="bi bi-envelope me-2"></i>Email: {{ user?.email }}</p>
+        <p><i class="bi bi-telephone me-2"></i>Телефон: {{ user?.phoneNumber }}</p>
+        <small class="text-muted">Зарегистрирован(а): {{ user?.createdAt | date:'dd.MM.yyyy' }}</small>
       </div>
 
       <ng-template #editField>
@@ -44,7 +44,7 @@
         <div class="col-md-6">
           <h5>Обо мне</h5>
           <div *ngIf="!isEditing; else editDesc">
-            <p>{{ user.studentDescription || 'Нет описания' }}</p>
+            <p>{{ user?.studentDescription || 'Нет описания' }}</p>
           </div>
           <ng-template #editDesc>
             <textarea class="form-control" rows="5" 
@@ -53,10 +53,10 @@
         </div>
 
         <!-- Описание учителя -->
-        <div class="col-md-6" *ngIf="user.teacherStatusConfirmed">
+        <div class="col-md-6" *ngIf="user?.teacherStatusConfirmed">
           <h5>Опыт преподавания</h5>
           <div *ngIf="!isEditing; else editTeacherDesc">
-            <p>{{ user.teacherDescription || 'Нет описания' }}</p>
+            <p>{{ user?.teacherDescription || 'Нет описания' }}</p>
           </div>
           <ng-template #editTeacherDesc>
             <textarea class="form-control" rows="5" 
@@ -67,7 +67,7 @@
     </div>
 
     <!-- Кнопки управления -->
-    <div class="col-12 mt-4">
+    <div class="col-12 mt-4" *ngIf="isCurrentUserProfile">
       <div *ngIf="!isEditing">
         <button class="btn btn-primary" (click)="startEditing()">
           Редактировать
@@ -84,17 +84,17 @@
     </div>
   </div>
 
-    <app-my-courses 
-    *ngIf="user.teacherStatusConfirmed"
-    [userId]="user.userId"
+  <app-my-courses 
+    *ngIf="user?.teacherStatusConfirmed"
+    [userId]="user?.userId"
     [AsTeacher]="true"
-    [showAddButton]="true"
+    [showAddButton]="isCurrentUserProfile"
     (addCourse)="onAddCourse()">
   </app-my-courses>
 
   <!-- Блок ученика -->
   <app-my-courses 
-    [userId]="user.userId"
+    [userId]="user?.userId"
     [AsTeacher]="false"
     [showAddButton]="false">
   </app-my-courses>
