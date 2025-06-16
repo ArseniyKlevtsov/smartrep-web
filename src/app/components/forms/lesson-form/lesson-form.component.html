@@ -1,0 +1,72 @@
+<div class="container py-4">
+  <div class="card lesson-form-card">
+    <div class="card-header">
+      <h3>{{ isEditMode ? 'Редактирование занятия' : 'Создание нового занятия' }}</h3>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="lessonForm" (ngSubmit)="onSubmit()">
+        <!-- Основные поля -->
+        <div class="mb-3">
+          <label class="form-label">Название занятия*</label>
+          <input type="text" class="form-control" formControlName="name">
+          <div *ngIf="lessonForm.get('name')?.invalid && lessonForm.get('name')?.touched" class="text-danger">
+            Обязательное поле (макс. 100 символов)
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Описание</label>
+          <textarea class="form-control" formControlName="description" rows="3"></textarea>
+          <div class="text-muted">Максимум 500 символов</div>
+        </div>
+
+        <!-- Дата/время и длительность -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label class="form-label">Дата и время начала*</label>
+            <input type="datetime-local" class="form-control" formControlName="startTime">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Длительность (минуты)*</label>
+            <input type="number" class="form-control" formControlName="durationMinutes" min="30" max="240" step="15">
+          </div>
+        </div>
+
+        <!-- Цена и статусы -->
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label class="form-label">Цена*</label>
+            <div class="input-group">
+              <input type="number" class="form-control" formControlName="price" min="0">
+              <span class="input-group-text">BYN</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Статус оплаты</label>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" formControlName="paymentStatus">
+              <label class="form-check-label">{{ lessonForm.value.paymentStatus ? 'Оплачено' : 'Не оплачено' }}</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Статус занятия*</label>
+            <select class="form-select" formControlName="status">
+              <option *ngFor="let status of statuses" [value]="status.value">{{ status.label }}</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Кнопки -->
+        <div class="d-flex justify-content-between mt-4">
+          <button type="button" class="btn btn-outline-secondary" (click)="router.navigate(['/lessons'])">
+            Отмена
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="lessonForm.invalid || isLoading">
+            {{ isEditMode ? 'Сохранить изменения' : 'Создать занятие' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

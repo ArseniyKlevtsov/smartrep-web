@@ -7,6 +7,7 @@ import { FullCourseResponse } from '../interfaces/courses/responses/full-course-
 import { CourseInfoRequest } from '../interfaces/courses/requests/course-info-request.interface';
 import { UpdateCourseRequest } from '../interfaces/courses/requests/update-course-request.interface';
 import { CreateCourseRequest } from '../interfaces/courses/requests/create-course-request.interface';
+import { GetMyCoursesRequest } from '../interfaces/courses/requests/my-courses.request.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -23,8 +24,8 @@ export class CourseService {
     );
   }
 
-  getMyCourses(request: any): Observable<any> {
-    return this.http.post('/api/courses/getMyCourses', request);
+  getMyCourses(request: GetMyCoursesRequest): Observable<GetFSPCoursesResponse> {
+    return this.http.post<GetFSPCoursesResponse>('/api/courses/getMyCourses', request);
   }
 
   createCourse(request: CreateCourseRequest): Observable<void> {

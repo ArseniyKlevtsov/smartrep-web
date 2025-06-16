@@ -1,0 +1,33 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Выберите курс для занятия</h2>
+  </div>
+
+  <div *ngIf="isLoading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Загрузка...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && courses.length === 0" class="alert alert-info">
+    У вас нет курсов для создания занятий
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div *ngFor="let course of courses" class="col">
+      <div class="card course-card h-100" (click)="selectCourse(course.courseId)">
+        <div class="card-img-top-container">
+          <img 
+            [src]="course.courseAvatarUrl || 'default-course.png'" 
+            class="card-img-top"
+            alt="Обложка курса"
+            onerror="this.src='default-course.png'">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ course.courseName }}</h5>
+          <input type="hidden" [value]="course.courseId">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

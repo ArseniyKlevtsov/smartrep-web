@@ -3,23 +3,22 @@ import { GetMyLessonsRequest } from '../../shared/interfaces/lessons/requests/ge
 import { UserStorageService } from '../../shared/services/user-storage.service';
 import { LessonService } from '../../shared/services/lesson.service';
 import moment from 'moment';
-import { ScheduleComponent } from "../../shared/components/schedule/schedule.component";
+import { ScheduleComponent } from '../../shared/components/schedule/schedule.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-lessons-page',
   imports: [ScheduleComponent],
   templateUrl: './my-lessons-page.component.html',
-  styleUrl: './my-lessons-page.component.css'
+  styleUrl: './my-lessons-page.component.css',
 })
 export class MyLessonsPageComponent implements OnInit {
   teacherLessons: any[] = [];
   studentLessons: any[] = [];
   isLoading = false;
   currentDate = moment();
-  
-  constructor(
-    private lessonService: LessonService
-  ) {}
+
+  constructor(private lessonService: LessonService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadLessons();
@@ -36,7 +35,7 @@ export class MyLessonsPageComponent implements OnInit {
       userId: userId,
       startDate: startDate,
       endDate: endDate,
-      asTeacher: true
+      asTeacher: true,
     };
 
     // Загрузка занятий как студент
@@ -44,27 +43,31 @@ export class MyLessonsPageComponent implements OnInit {
       userId: userId,
       startDate: startDate,
       endDate: endDate,
-      asTeacher: false
+      asTeacher: false,
     };
 
     this.lessonService.GetLessons(teacherRequest).subscribe({
       next: (teacherResponse) => {
         this.teacherLessons = teacherResponse.lessons;
-        
+
         this.lessonService.GetLessons(studentRequest).subscribe({
           next: (studentResponse) => {
             this.studentLessons = studentResponse.lessons;
             this.isLoading = false;
           },
-          error: () => this.isLoading = false
+          error: () => (this.isLoading = false),
         });
       },
-      error: () => this.isLoading = false
+      error: () => (this.isLoading = false),
     });
   }
 
   changeWeek(weeks: number): void {
     this.currentDate.add(weeks, 'weeks');
     this.loadLessons();
+  }
+
+  addTeacherLesson(): void {
+    this.router.navigate(['/lessons/select-course']);
   }
 }

@@ -5,6 +5,7 @@ import { GetMyLessonsRequest } from '../interfaces/lessons/requests/get-my-lesso
 import { GetMyLessonsResponse } from '../interfaces/lessons/responses/get-my-lessons-response';
 import { GetLessonRequest } from '../interfaces/lessons/requests/get-lesson-request';
 import { GetLessonResponse } from '../interfaces/lessons/responses/get-lesson-response';
+import { CreateLessonRequest, UpdateLessonRequest } from '../interfaces/lessons/requests/create-lessons-request.inerface';
 
 @Injectable({
   providedIn: 'root',
@@ -29,9 +30,15 @@ export class LessonService {
   }
 
   getLesson(request: GetLessonRequest): Observable<GetLessonResponse> {
-    return this.http.post<GetLessonResponse>(
-      '/api/lessons/getLesson',
-      request
-    );
+    return this.http.post<GetLessonResponse>('/api/lessons/getLesson', request);
   }
+
+  createLesson(data: CreateLessonRequest): Observable<any> {
+    return this.http.post('/api/lessons/create', data);
+  }
+
+  updateLesson(id: string, data: UpdateLessonRequest): Observable<any> {
+    return this.http.put(`/api/lessons/update/${id}`, data);
+  }
+
 }

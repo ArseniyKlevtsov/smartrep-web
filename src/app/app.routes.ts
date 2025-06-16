@@ -14,6 +14,8 @@ import { MyLessonsPageComponent } from './components/my-lessons-page/my-lessons-
 import { LessonPageComponent } from './components/lesson-page/lesson-page.component';
 import { CourseViewComponent } from './components/views/course-view/course-view.component';
 import { CourseFormComponent } from './components/forms/course-form/course-form.component';
+import { SelectCoursePageComponent } from './components/select-course-page/select-course-page.component';
+import { LessonFormComponent } from './components/forms/lesson-form/lesson-form.component';
 
 export const routes: Routes = [
 
@@ -34,6 +36,9 @@ export const routes: Routes = [
       { path: 'profile', component: ProfilePageComponent, canActivate: [authGuard] },
 
       { path: 'my-lessons', component: MyLessonsPageComponent, canActivate: [authGuard] },
+      { path: 'lessons/select-course', component: SelectCoursePageComponent, canActivate: [authGuard] },
+      { path: 'lessons/new', component: LessonFormComponent, canActivate: [authGuard] },
+      { path: 'lessons/edit/:id', component: LessonFormComponent, canActivate: [authGuard] },
       { path: 'lessons/:id', component: LessonPageComponent, canActivate: [authGuard] },
     ]
   },
