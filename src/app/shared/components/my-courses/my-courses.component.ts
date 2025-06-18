@@ -45,7 +45,6 @@ export class MyCoursesComponent implements OnInit {
         this.courses = response.courses || [];
       },
       error: (err) => {
-        this.error = 'Не удалось загрузить курсы';
         console.error(err);
       }
     });
