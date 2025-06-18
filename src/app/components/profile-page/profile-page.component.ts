@@ -7,13 +7,14 @@ import { FormsModule } from '@angular/forms';
 import { UserStorageService } from '../../shared/services/user-storage.service';
 import { MyCoursesComponent } from '../../shared/components/my-courses/my-courses.component';
 import { Router, ActivatedRoute } from '@angular/router';
+import { switchMap, timer } from 'rxjs';
 
 @Component({
   selector: 'app-profile-page',
   standalone: true,
   imports: [NgIf, FormsModule, DatePipe, MyCoursesComponent],
   templateUrl: './profile-page.component.html',
-  styleUrls: ['./profile-page.component.css']
+  styleUrls: ['./profile-page.component.css'],
 })
 export class ProfilePageComponent implements OnInit {
   user!: UserProfileResponse;
@@ -29,10 +30,11 @@ export class ProfilePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       this.profileUserId = params.get('id');
-      this.isCurrentUserProfile = !this.profileUserId || 
-                                 this.profileUserId === UserStorageService.getUserId();
+      this.isCurrentUserProfile =
+        !this.profileUserId ||
+        this.profileUserId === UserStorageService.getUserId();
       this.loadProfile();
     });
   }
@@ -41,17 +43,27 @@ export class ProfilePageComponent implements OnInit {
     const userId = this.profileUserId || UserStorageService.getUserId();
     const request: UserInfoRequest = { userId };
 
-    this.userService.getUserProfile(request).subscribe({
-      next: (response) => {
-        this.user = response;
-      },
-      error: (err) => console.error('Ошибка загрузки профиля', err),
-    });
+    this.userService
+      .getUserProfile(request)
+      .pipe(
+        switchMap((response) => {
+          this.user = response;
+          // Задержка на полсекунды перед дальнейшими действиями
+          return timer(500); // 500 мс задержки
+        })
+      )
+      .subscribe({
+        next: () => {
+          // Здесь можно добавить дополнительные действия после задержки
+          console.log('Профиль загружен и задержка завершена');
+        },
+        error: (err) => console.error('Ошибка загрузки профиля', err),
+      });
   }
 
   startEditing(): void {
     if (!this.isCurrentUserProfile) return;
-    
+
     this.editData = { ...this.user };
     this.isEditing = true;
   }
@@ -62,7 +74,7 @@ export class ProfilePageComponent implements OnInit {
 
   saveChanges(): void {
     if (!this.isCurrentUserProfile) return;
-    
+
     console.log('Данные для сохранения:', this.editData);
     this.isEditing = false;
   }
@@ -73,5 +85,11 @@ export class ProfilePageComponent implements OnInit {
 
   onAddCourse(): void {
     this.router.navigate(['/courses/new']);
+  }
+
+  isValidGuid(guid: string | null): boolean {
+    const guidPattern =
+      /^[{]?([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})[}]?$/;
+    return guidPattern.test(guid || '');
   }
 }

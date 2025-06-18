@@ -3,7 +3,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CoursePreviewResponse } from '../../interfaces/courses/responses/course-preview-response.interface';
 import { CourseService } from '../../services/course.service';
 import { GetMyCoursesRequest } from '../../interfaces/courses/requests/my-courses.request.interface';
-import { UserStorageService } from '../../services/user-storage.service';
 import { finalize } from 'rxjs';
 import { CourseCardComponent } from "../course-card/course-card.component";
 
@@ -30,6 +29,7 @@ export class MyCoursesComponent implements OnInit {
   }
 
   loadCourses(): void {
+
     this.isLoading = true;
     this.error = null;
 

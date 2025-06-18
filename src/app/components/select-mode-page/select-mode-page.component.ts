@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ModeService } from '../../shared/services/mode.service';
 import { Router } from '@angular/router';
 import { UserStorageService } from '../../shared/services/user-storage.service';
-import { NotificationService } from '../../shared/services/notification.service';
 import { TeacherService } from '../../shared/services/teacher.service';
 
 @Component({

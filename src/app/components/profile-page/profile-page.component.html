@@ -85,8 +85,8 @@
   </div>
 
   <app-my-courses 
-    *ngIf="user?.teacherStatusConfirmed"
-    [userId]="user?.userId"
+    *ngIf="user?.teacherStatusConfirmed && user?.userId"
+    [userId]="profileUserId"
     [AsTeacher]="true"
     [showAddButton]="isCurrentUserProfile"
     (addCourse)="onAddCourse()">
@@ -94,7 +94,7 @@
 
   <!-- Блок ученика -->
   <app-my-courses 
-    [userId]="user?.userId"
+    [userId]="profileUserId"
     [AsTeacher]="false"
     [showAddButton]="false">
   </app-my-courses>
