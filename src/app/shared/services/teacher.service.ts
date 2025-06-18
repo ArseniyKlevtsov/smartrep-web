@@ -5,15 +5,25 @@ import { GetFSPTeachersRequest } from '../interfaces/teachers/requests/get-fsp-t
 import { GetFSPTeachersResponse } from '../interfaces/teachers/responses/get-fsp-teachers-response.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TeacherService {
+  constructor(private http: HttpClient) {}
 
-  constructor(
-    private http: HttpClient,
-  ) {}
-
-  getShortcutUserProfile(request: GetFSPTeachersRequest): Observable<GetFSPTeachersResponse> {
-    return this.http.post<GetFSPTeachersResponse>('/api/teachers/getFSPTeachersResponse', request);
+  getShortcutUserProfile(
+    request: GetFSPTeachersRequest
+  ): Observable<GetFSPTeachersResponse> {
+    return this.http.post<GetFSPTeachersResponse>(
+      '/api/teachers/getFSPTeachersResponse',
+      request
+    );
   }
+
+  setTeacherStatus(teacherId: string): Observable<void> {
+    return this.http.put<void>(
+      `/api/teachers/setTeacherStatus/${teacherId}`,
+      {}
+    );
+  }
+  
 }
