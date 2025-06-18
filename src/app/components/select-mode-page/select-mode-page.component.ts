@@ -21,8 +21,8 @@ export class SelectModePageComponent {
   selectTeacherMode() {
     const userId = UserStorageService.getUserId();
     this.teacherService.setTeacherStatus(userId).subscribe({
-      next: () => this.router.navigate(['/teacher-courses']),
-      error: (err) => NotificationService.error('Ошибка:', err),
+      next: () => this.router.navigate(['/all-courses']),
+      error: (err) => console.error('Ошибка:', err),
     });
   }
 
